@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <title>飞书与slack交互</title>
+  <base href="./">
+  <meta id="root-path" root-path="./">
+
+  <link rel="icon" sizes="96x96" href="https://publish-01.obsidian.md/access/f786db9fac45774fa4f0d8112e232d67/favicon-96x96.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=5.0">
+  <meta charset="UTF-8">
+  <script src="https://code.iconify.design/iconify-icon/1.0.3/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="lib/styles/obsidian-styles.css">
+  <link rel="stylesheet" href="lib/styles/theme.css">
+  <link rel="stylesheet" href="lib/styles/plugin-styles.css">
+  <link rel="stylesheet" href="lib/styles/snippets.css">
+  <style> </style>
+
+
+  <!-- Graph View Data -->
+  <script>
+    let nodes = {
+      "nodeCount": 46,
+      "linkCount": 0,
+      "radii": [null, null, 3, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+      "labels": ["线性代数思维导图", "未命名思维导图", "未命名 1", "rename", "语法", "过了很久终于我愿抬头看", "程序编写", "飞书与slack交互", "项目摘要", "全球疫情", "zhushi.", "zhengyanXinXingChengZhenHuaBeiJingXiaZhongXiBuNongMinShiMinHuaLuJingTanSuo2022-zotero", "3.项目的应用前景和学术价值", "2.项目进度安排", "2.项目创新之处", "2.国内外研究现状和发展趋势", "1.项目研究的背景及意义", "1.研究目标、内容和拟解决的关键问题", "1.研究思路和方法", "未命名 1", "未命名", "交互", "summarize", "simplify", "rewrite", "getTitles", "getTags", "getParagraph", "getOutline", "getIdeas", "getEmailPos", "getEmailNeg", "Shell-commands", "123", "【考点9】保持职业怀疑（★★★熟读）", "未命名", "【考点6】审计目标", "【考点8】审计业务基本要求（★熟悉）", "【考点1】审计的定义（★★★必背必记）", "【考点5】要素", "6", "ok", "4", "1_out", "111", "1"],
+      "paths": ["考研数学/数学考点/线性代数思维导图.html", "考研数学/未命名思维导图.html", "未命名-1.html", "reading-notes/rename.html", "reading-notes/语法.html", "reading-notes/过了很久终于我愿抬头看.html", "reading-notes/程序编写.html", "飞书与slack交互.html", "论文/立项/项目摘要.html", "论文/立项/全球疫情.html", "论文/立项/zhushi..html", "论文/立项/zhengyanxinxingchengzhenhuabeijingxiazhongxibunongminshiminhualujingtansuo2022-zotero.html", "论文/立项/3.项目的应用前景和学术价值.html", "论文/立项/2.项目进度安排.html", "论文/立项/2.项目创新之处.html", "论文/立项/2.国内外研究现状和发展趋势.html", "论文/立项/1.项目研究的背景及意义.html", "论文/立项/1.研究目标、内容和拟解决的关键问题.html", "论文/立项/1.研究思路和方法.html", "未命名-1.html", "审计/未命名.html", "交互.html", "textgenerator/prompts/default/summarize.html", "textgenerator/prompts/default/simplify.html", "textgenerator/prompts/default/rewrite.html", "textgenerator/prompts/default/gettitles.html", "textgenerator/prompts/default/gettags.html", "textgenerator/prompts/default/getparagraph.html", "textgenerator/prompts/default/getoutline.html", "textgenerator/prompts/default/getideas.html", "textgenerator/prompts/default/getemailpos.html", "textgenerator/prompts/default/getemailneg.html", "shell-commands.html", "excalidraw/123.html", "3/【考点9】保持职业怀疑（★★★熟读）.html", "3/未命名.html", "3/【考点6】审计目标.html", "3/【考点8】审计业务基本要求（★熟悉）.html", "3/【考点1】审计的定义（★★★必背必记）.html", "3/【考点5】要素.html", "3/6.html", "3/ok.html", "3/4.html", "3/1_out.html", "3/111.html", "3/1.html"],
+      "linkSources": [],
+      "linkTargets": []
+    };
+    let attractionForce = 1;
+    let linkLength = 10;
+    let repulsionForce = 150;
+    let centralForce = 3;
+    let edgePruning = 100;
+  </script>
+
+  <script type="module" src="lib/scripts/graph_view.js"></script>
+
+  <script src="lib/scripts/graph_wasm.js"></script>
+
+  <script src="lib/scripts/tinycolor.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.2.4/pixi.min.js" integrity="sha512-Ch/O6kL8BqUwAfCF7Ie5SX1Hin+BJgYH4pNjRqXdTEqMsis1TUYg+j6nnI9uduPjGaj7DN4UKCZgpvoExt6dkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="lib/scripts/webpage.js"></script>
+
+</head>
+
+<body class="mod-windows is-frameless is-hidden-frameless obsidian-app is-maximized theme-light show-inline-title show-view-header" style="--zoom-factor:1.2; --font-text-size:19px; --line-width:50em; --line-width-adaptive:50em; --file-line-width:50em; --content-width:500em; --sidebar-width:25em; --collapse-arrow-size:0.4em; --tree-horizontal-spacing:1em; --tree-vertical-spacing:0.5em; --sidebar-margin:12px;">
+  <div class="webpage-container">
+    <div class="sidebar-left sidebar">
+      <div class="sidebar-content">
+        <div><label class="theme-toggle-container" for="theme_toggle"><input class="theme-toggle-input" type="checkbox" id="theme_toggle">
+            <div class="toggle-background"></div>
+          </label></div>
+        <div class="tree-container file-tree mod-nav-indicator" data-depth="0">
+          <div class="tree-header"><span class="sidebar-section-header">obsidian</span><button class="clickable-icon collapse-tree-button is-collapsed"><iconify-icon icon="ph:arrows-in-line-horizontal-bold" width="18px" height="18px" rotate="90deg" color="currentColor"></iconify-icon></button></div>
+          <div class="tree-scroll-area"></div>
+        </div>
+      </div>
+    </div>
+    <div class="document-container">
+      <div class="markdown-preview-view markdown-rendered node-insert-event allow-fold-headings show-indentation-guide allow-fold-lists" style="tab-size: 4;">
+        <style id="MJX-CHTML-styles">
+          mjx-container[jax="CHTML"] {
+            line-height: 0;
+          }
+
+          mjx-container [space="1"] {
+            margin-left: 0.111em;
+          }
+
+          mjx-container [space="2"] {
+            margin-left: 0.167em;
+          }
+
+          mjx-container [space="3"] {
+            margin-left: 0.222em;
+          }
+
+          mjx-container [space="4"] {
+            margin-left: 0.278em;
+          }
+
+          mjx-container [space="5"] {
+            margin-left: 0.333em;
+          }
+
+          mjx-container [rspace="1"] {
+            margin-right: 0.111em;
+          }
+
+          mjx-container [rspace="2"] {
+            margin-right: 0.167em;
+          }
+
+          mjx-container [rspace="3"] {
+            margin-right: 0.222em;
+          }
+
+          mjx-container [rspace="4"] {
+            margin-right: 0.278em;
+          }
+
+          mjx-container [rspace="5"] {
+            margin-right: 0.333em;
+          }
+
+          mjx-container [size="s"] {
+            font-size: 70.7%;
+          }
+
+          mjx-container [size="ss"] {
+            font-size: 50%;
+          }
+
+          mjx-container [size="Tn"] {
+            font-size: 60%;
+          }
+
+          mjx-container [size="sm"] {
+            font-size: 85%;
+          }
+
+          mjx-container [size="lg"] {
+            font-size: 120%;
+          }
+
+          mjx-container [size="Lg"] {
+            font-size: 144%;
+          }
+
+          mjx-container [size="LG"] {
+            font-size: 173%;
+          }
+
+          mjx-container [size="hg"] {
+            font-size: 207%;
+          }
+
+          mjx-container [size="HG"] {
+            font-size: 249%;
+          }
+
+          mjx-container [width="full"] {
+            width: 100%;
+          }
+
+          mjx-box {
+            display: inline-block;
+          }
+
+          mjx-block {
+            display: block;
+          }
+
+          mjx-itable {
+            display: inline-table;
+          }
+
+          mjx-row {
+            display: table-row;
+          }
+
+          mjx-row>* {
+            display: table-cell;
+          }
+
+          mjx-mtext {
+            display: inline-block;
+          }
+
+          mjx-mstyle {
+            display: inline-block;
+          }
+
+          mjx-merror {
+            display: inline-block;
+            color: red;
+            background-color: yellow;
+          }
+
+          mjx-mphantom {
+            visibility: hidden;
+          }
+
+          mjx-assistive-mml {
+            top: 0px;
+            left: 0px;
+            clip: rect(1px, 1px, 1px, 1px);
+            user-select: none;
+            position: absolute !important;
+            padding: 1px 0px 0px !important;
+            border: 0px !important;
+            display: block !important;
+            width: auto !important;
+            overflow: hidden !important;
+          }
+
+          mjx-assistive-mml[display="block"] {
+            width: 100% !important;
+          }
+
+          mjx-math {
+            display: inline-block;
+            text-align: left;
+            line-height: 0;
+            text-indent: 0px;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 100%;
+            letter-spacing: normal;
+            border-collapse: collapse;
+            overflow-wrap: normal;
+            word-spacing: normal;
+            white-space: nowrap;
+            direction: ltr;
+            padding: 1px 0px;
+          }
+
+          mjx-container[jax="CHTML"][display="true"] {
+            display: block;
+            text-align: center;
+            margin: 1em 0px;
+          }
+
+          mjx-container[jax="CHTML"][display="true"][width="full"] {
+            display: flex;
+          }
+
+          mjx-container[jax="CHTML"][display="true"] mjx-math {
+            padding: 0px;
+          }
+
+          mjx-container[jax="CHTML"][justify="left"] {
+            text-align: left;
+          }
+
+          mjx-container[jax="CHTML"][justify="right"] {
+            text-align: right;
+          }
+
+          mjx-mtable {
+            display: inline-block;
+            text-align: center;
+            vertical-align: 0.25em;
+            position: relative;
+            box-sizing: border-box;
+            border-spacing: 0px;
+            border-collapse: collapse;
+          }
+
+          mjx-mstyle[size="s"] mjx-mtable {
+            vertical-align: 0.354em;
+          }
+
+          mjx-labels {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+          }
+
+          mjx-table {
+            display: inline-block;
+            vertical-align: -0.5ex;
+            box-sizing: border-box;
+          }
+
+          mjx-table>mjx-itable {
+            vertical-align: middle;
+            text-align: left;
+            box-sizing: border-box;
+          }
+
+          mjx-labels>mjx-itable {
+            position: absolute;
+            top: 0px;
+          }
+
+          mjx-mtable[justify="left"] {
+            text-align: left;
+          }
+
+          mjx-mtable[justify="right"] {
+            text-align: right;
+          }
+
+          mjx-mtable[justify="left"][side="left"] {
+            padding-right: 0px !important;
+          }
+
+          mjx-mtable[justify="left"][side="right"] {
+            padding-left: 0px !important;
+          }
+
+          mjx-mtable[justify="right"][side="left"] {
+            padding-right: 0px !important;
+          }
+
+          mjx-mtable[justify="right"][side="right"] {
+            padding-left: 0px !important;
+          }
+
+          mjx-mtable[align] {
+            vertical-align: baseline;
+          }
+
+          mjx-mtable[align="top"]>mjx-table {
+            vertical-align: top;
+          }
+
+          mjx-mtable[align="bottom"]>mjx-table {
+            vertical-align: bottom;
+          }
+
+          mjx-mtable[side="right"] mjx-labels {
+            min-width: 100%;
+          }
+
+          mjx-mtr {
+            display: table-row;
+            text-align: left;
+          }
+
+          mjx-mtr[rowalign="top"]>mjx-mtd {
+            vertical-align: top;
+          }
+
+          mjx-mtr[rowalign="center"]>mjx-mtd {
+            vertical-align: middle;
+          }
+
+          mjx-mtr[rowalign="bottom"]>mjx-mtd {
+            vertical-align: bottom;
+          }
+
+          mjx-mtr[rowalign="baseline"]>mjx-mtd {
+            vertical-align: baseline;
+          }
+
+          mjx-mtr[rowalign="axis"]>mjx-mtd {
+            vertical-align: 0.25em;
+          }
+
+          mjx-mtd {
+            display: table-cell;
+            text-align: center;
+            padding: 0.215em 0.4em;
+          }
+
+          mjx-mtd:first-child {
+            padding-left: 0px;
+          }
+
+          mjx-mtd:last-child {
+            padding-right: 0px;
+          }
+
+          mjx-mtable>*>mjx-itable> :first-child>mjx-mtd {
+            padding-top: 0px;
+          }
+
+          mjx-mtable>*>mjx-itable> :last-child>mjx-mtd {
+            padding-bottom: 0px;
+          }
+
+          mjx-tstrut {
+            display: inline-block;
+            height: 1em;
+            vertical-align: -0.25em;
+          }
+
+          mjx-labels[align="left"]>mjx-mtr>mjx-mtd {
+            text-align: left;
+          }
+
+          mjx-labels[align="right"]>mjx-mtr>mjx-mtd {
+            text-align: right;
+          }
+
+          mjx-mtd[extra] {
+            padding: 0px;
+          }
+
+          mjx-mtd[rowalign="top"] {
+            vertical-align: top;
+          }
+
+          mjx-mtd[rowalign="center"] {
+            vertical-align: middle;
+          }
+
+          mjx-mtd[rowalign="bottom"] {
+            vertical-align: bottom;
+          }
+
+          mjx-mtd[rowalign="baseline"] {
+            vertical-align: baseline;
+          }
+
+          mjx-mtd[rowalign="axis"] {
+            vertical-align: 0.25em;
+          }
+
+          mjx-mi {
+            display: inline-block;
+            text-align: left;
+          }
+
+          mjx-c {
+            display: inline-block;
+          }
+
+          mjx-utext {
+            display: inline-block;
+            padding: 0.75em 0px 0.2em;
+          }
+
+          mjx-mo {
+            display: inline-block;
+            text-align: left;
+          }
+
+          mjx-stretchy-h {
+            display: inline-table;
+            width: 100%;
+          }
+
+          mjx-stretchy-h>* {
+            display: table-cell;
+            width: 0px;
+          }
+
+          mjx-stretchy-h>*>mjx-c {
+            display: inline-block;
+            transform: scaleX(1);
+          }
+
+          mjx-stretchy-h>*>mjx-c::before {
+            display: inline-block;
+            width: initial;
+          }
+
+          mjx-stretchy-h>mjx-ext {
+            overflow: clip visible;
+            width: 100%;
+          }
+
+          mjx-stretchy-h>mjx-ext>mjx-c::before {
+            transform: scaleX(500);
+          }
+
+          mjx-stretchy-h>mjx-ext>mjx-c {
+            width: 0px;
+          }
+
+          mjx-stretchy-h>mjx-beg>mjx-c {
+            margin-right: -0.1em;
+          }
+
+          mjx-stretchy-h>mjx-end>mjx-c {
+            margin-left: -0.1em;
+          }
+
+          mjx-stretchy-v {
+            display: inline-block;
+          }
+
+          mjx-stretchy-v>* {
+            display: block;
+          }
+
+          mjx-stretchy-v>mjx-beg {
+            height: 0px;
+          }
+
+          mjx-stretchy-v>mjx-end>mjx-c {
+            display: block;
+          }
+
+          mjx-stretchy-v>*>mjx-c {
+            transform: scaleY(1);
+            transform-origin: left center;
+            overflow: hidden;
+          }
+
+          mjx-stretchy-v>mjx-ext {
+            display: block;
+            height: 100%;
+            box-sizing: border-box;
+            border: 0px solid transparent;
+            overflow: visible clip;
+          }
+
+          mjx-stretchy-v>mjx-ext>mjx-c::before {
+            width: initial;
+            box-sizing: border-box;
+          }
+
+          mjx-stretchy-v>mjx-ext>mjx-c {
+            transform: scaleY(500) translateY(0.075em);
+            overflow: visible;
+          }
+
+          mjx-mark {
+            display: inline-block;
+            height: 0px;
+          }
+
+          mjx-munder {
+            display: inline-block;
+            text-align: left;
+          }
+
+          mjx-over {
+            text-align: left;
+          }
+
+          mjx-munder:not([limits="false"]) {
+            display: inline-table;
+          }
+
+          mjx-munder>mjx-row {
+            text-align: left;
+          }
+
+          mjx-under {
+            padding-bottom: 0.1em;
+          }
+
+          mjx-texatom {
+            display: inline-block;
+            text-align: left;
+          }
+
+          mjx-mn {
+            display: inline-block;
+            text-align: left;
+          }
+
+          mjx-mfrac {
+            display: inline-block;
+            text-align: left;
+          }
+
+          mjx-frac {
+            display: inline-block;
+            vertical-align: 0.17em;
+            padding: 0px 0.22em;
+          }
+
+          mjx-frac[type="d"] {
+            vertical-align: 0.04em;
+          }
+
+          mjx-frac[delims] {
+            padding: 0px 0.1em;
+          }
+
+          mjx-frac[atop] {
+            padding: 0px 0.12em;
+          }
+
+          mjx-frac[atop][delims] {
+            padding: 0px;
+          }
+
+          mjx-dtable {
+            display: inline-table;
+            width: 100%;
+          }
+
+          mjx-dtable>* {
+            font-size: 2000%;
+          }
+
+          mjx-dbox {
+            display: block;
+            font-size: 5%;
+          }
+
+          mjx-num {
+            display: block;
+            text-align: center;
+          }
+
+          mjx-den {
+            display: block;
+            text-align: center;
+          }
+
+          mjx-mfrac[bevelled]>mjx-num {
+            display: inline-block;
+          }
+
+          mjx-mfrac[bevelled]>mjx-den {
+            display: inline-block;
+          }
+
+          mjx-den[align="right"],
+          mjx-num[align="right"] {
+            text-align: right;
+          }
+
+          mjx-den[align="left"],
+          mjx-num[align="left"] {
+            text-align: left;
+          }
+
+          mjx-nstrut {
+            display: inline-block;
+            height: 0.054em;
+            width: 0px;
+            vertical-align: -0.054em;
+          }
+
+          mjx-nstrut[type="d"] {
+            height: 0.217em;
+            vertical-align: -0.217em;
+          }
+
+          mjx-dstrut {
+            display: inline-block;
+            height: 0.505em;
+            width: 0px;
+          }
+
+          mjx-dstrut[type="d"] {
+            height: 0.726em;
+          }
+
+          mjx-line {
+            display: block;
+            box-sizing: border-box;
+            min-height: 1px;
+            height: 0.06em;
+            border-top: 0.06em solid;
+            margin: 0.06em -0.1em;
+            overflow: hidden;
+          }
+
+          mjx-line[type="d"] {
+            margin: 0.18em -0.1em;
+          }
+
+          mjx-mrow {
+            display: inline-block;
+            text-align: left;
+          }
+
+          mjx-msup {
+            display: inline-block;
+            text-align: left;
+          }
+
+          mjx-c::before {
+            display: block;
+            width: 0px;
+          }
+
+          .MJX-TEX {
+            font-family: MJXZERO, MJXTEX;
+          }
+
+          .TEX-B {
+            font-family: MJXZERO, MJXTEX-B;
+          }
+
+          .TEX-I {
+            font-family: MJXZERO, MJXTEX-I;
+          }
+
+          .TEX-MI {
+            font-family: MJXZERO, MJXTEX-MI;
+          }
+
+          .TEX-BI {
+            font-family: MJXZERO, MJXTEX-BI;
+          }
+
+          .TEX-S1 {
+            font-family: MJXZERO, MJXTEX-S1;
+          }
+
+          .TEX-S2 {
+            font-family: MJXZERO, MJXTEX-S2;
+          }
+
+          .TEX-S3 {
+            font-family: MJXZERO, MJXTEX-S3;
+          }
+
+          .TEX-S4 {
+            font-family: MJXZERO, MJXTEX-S4;
+          }
+
+          .TEX-A {
+            font-family: MJXZERO, MJXTEX-A;
+          }
+
+          .TEX-C {
+            font-family: MJXZERO, MJXTEX-C;
+          }
+
+          .TEX-CB {
+            font-family: MJXZERO, MJXTEX-CB;
+          }
+
+          .TEX-FR {
+            font-family: MJXZERO, MJXTEX-FR;
+          }
+
+          .TEX-FRB {
+            font-family: MJXZERO, MJXTEX-FRB;
+          }
+
+          .TEX-SS {
+            font-family: MJXZERO, MJXTEX-SS;
+          }
+
+          .TEX-SSB {
+            font-family: MJXZERO, MJXTEX-SSB;
+          }
+
+          .TEX-SSI {
+            font-family: MJXZERO, MJXTEX-SSI;
+          }
+
+          .TEX-SC {
+            font-family: MJXZERO, MJXTEX-SC;
+          }
+
+          .TEX-T {
+            font-family: MJXZERO, MJXTEX-T;
+          }
+
+          .TEX-V {
+            font-family: MJXZERO, MJXTEX-V;
+          }
+
+          .TEX-VB {
+            font-family: MJXZERO, MJXTEX-VB;
+          }
+
+          mjx-stretchy-v mjx-c,
+          mjx-stretchy-h mjx-c {
+            font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A !important;
+          }
+
+          @font-face {
+            font-family: MJXZERO;
+            src: url("app://obsidian.md/lib/mathjax/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+          }
+
+          @font-face {
+            font-family: MJXTEX;
+            src: url("app://obsidian.md/lib/mathjax/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+          }
+
+          @font-face {
+            font-family: MJXTEX-B;
+            src: url("app://obsidian.md/lib/mathjax/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+          }
+
+          @font-face {
+            font-family: MJXTEX-I;
+            src: url("app://obsidian.md/lib/mathjax/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+          }
+
+          @font-face {
+            font-family: MJXTEX-MI;
+            src: url("app://obsidian.md/lib/mathjax/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+          }
+
+          @font-face {
+            font-family: MJXTEX-BI;
+            src: url("app://obsidian.md/lib/mathjax/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+          }
+
+          @font-face {
+            font-family: MJXTEX-S1;
+            src: url("app://obsidian.md/lib/mathjax/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+          }
+
+          @font-face {
+            font-family: MJXTEX-S2;
+            src: url("app://obsidian.md/lib/mathjax/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+          }
+
+          @font-face {
+            font-family: MJXTEX-S3;
+            src: url("app://obsidian.md/lib/mathjax/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+          }
+
+          @font-face {
+            font-family: MJXTEX-S4;
+            src: url("app://obsidian.md/lib/mathjax/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+          }
+
+          @font-face {
+            font-family: MJXTEX-A;
+            src: url("app://obsidian.md/lib/mathjax/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+          }
+
+          @font-face {
+            font-family: MJXTEX-C;
+            src: url("app://obsidian.md/lib/mathjax/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+          }
+
+          @font-face {
+            font-family: MJXTEX-CB;
+            src: url("app://obsidian.md/lib/mathjax/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+          }
+
+          @font-face {
+            font-family: MJXTEX-FR;
+            src: url("app://obsidian.md/lib/mathjax/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+          }
+
+          @font-face {
+            font-family: MJXTEX-FRB;
+            src: url("app://obsidian.md/lib/mathjax/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+          }
+
+          @font-face {
+            font-family: MJXTEX-SS;
+            src: url("app://obsidian.md/lib/mathjax/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+          }
+
+          @font-face {
+            font-family: MJXTEX-SSB;
+            src: url("app://obsidian.md/lib/mathjax/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+          }
+
+          @font-face {
+            font-family: MJXTEX-SSI;
+            src: url("app://obsidian.md/lib/mathjax/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+          }
+
+          @font-face {
+            font-family: MJXTEX-SC;
+            src: url("app://obsidian.md/lib/mathjax/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+          }
+
+          @font-face {
+            font-family: MJXTEX-T;
+            src: url("app://obsidian.md/lib/mathjax/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+          }
+
+          @font-face {
+            font-family: MJXTEX-V;
+            src: url("app://obsidian.md/lib/mathjax/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+          }
+
+          @font-face {
+            font-family: MJXTEX-VB;
+            src: url("app://obsidian.md/lib/mathjax/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+          }
+
+          mjx-c.mjx-c1D44E.TEX-I::before {
+            padding: 0.441em 0.529em 0.01em 0px;
+            content: "a";
+          }
+
+          mjx-c.mjx-c2C::before {
+            padding: 0.121em 0.278em 0.194em 0px;
+            content: ",";
+          }
+
+          mjx-c.mjx-c1D44F.TEX-I::before {
+            padding: 0.694em 0.429em 0.011em 0px;
+            content: "b";
+          }
+
+          mjx-c.mjx-c1D43C.TEX-I::before {
+            padding: 0.683em 0.504em 0px 0px;
+            content: "I";
+          }
+
+          mjx-c.mjx-c3D::before {
+            padding: 0.583em 0.778em 0.082em 0px;
+            content: "=";
+          }
+
+          mjx-c.mjx-c6C::before {
+            padding: 0.694em 0.278em 0px 0px;
+            content: "l";
+          }
+
+          mjx-c.mjx-c69::before {
+            padding: 0.669em 0.278em 0px 0px;
+            content: "i";
+          }
+
+          mjx-c.mjx-c6D::before {
+            padding: 0.442em 0.833em 0px 0px;
+            content: "m";
+          }
+
+          mjx-c.mjx-c1D465.TEX-I::before {
+            padding: 0.442em 0.572em 0.011em 0px;
+            content: "x";
+          }
+
+          mjx-c.mjx-c2192::before {
+            padding: 0.511em 1em 0.011em 0px;
+            content: "→";
+          }
+
+          mjx-c.mjx-c30::before {
+            padding: 0.666em 0.5em 0.022em 0px;
+            content: "0";
+          }
+
+          mjx-c.mjx-c2B::before {
+            padding: 0.583em 0.778em 0.082em 0px;
+            content: "+";
+          }
+
+          mjx-c.mjx-c1D452.TEX-I::before {
+            padding: 0.442em 0.466em 0.011em 0px;
+            content: "e";
+          }
+
+          mjx-c.mjx-c31::before {
+            padding: 0.666em 0.5em 0px 0px;
+            content: "1";
+          }
+
+          mjx-c.mjx-c2212::before {
+            padding: 0.583em 0.778em 0.082em 0px;
+            content: "−";
+          }
+
+          mjx-c.mjx-c22C5::before {
+            padding: 0.31em 0.278em 0px 0px;
+            content: "⋅";
+          }
+
+          mjx-c.mjx-c73::before {
+            padding: 0.448em 0.394em 0.011em 0px;
+            content: "s";
+          }
+
+          mjx-c.mjx-c6E::before {
+            padding: 0.442em 0.556em 0px 0px;
+            content: "n";
+          }
+
+          mjx-c.mjx-c2061::before {
+            padding: 0px;
+            content: "";
+          }
+
+          mjx-c.mjx-c1D45D.TEX-I::before {
+            padding: 0.442em 0.503em 0.194em 0px;
+            content: "p";
+          }
+
+          mjx-c.mjx-c7C::before {
+            padding: 0.75em 0.278em 0.249em 0px;
+            content: "|";
+          }
+
+          mjx-c.mjx-c5F::before {
+            padding: 0px 0.5em 0.062em 0px;
+            content: "_";
+          }
+
+          mjx-c.mjx-c2E::before {
+            padding: 0.12em 0.278em 0px 0px;
+            content: ".";
+          }
+
+          mjx-c.mjx-c1D45B.TEX-I::before {
+            padding: 0.442em 0.6em 0.011em 0px;
+            content: "n";
+          }
+
+          mjx-c.mjx-c221E::before {
+            padding: 0.442em 1em 0.011em 0px;
+            content: "∞";
+          }
+
+          mjx-c.mjx-c33::before {
+            padding: 0.665em 0.5em 0.022em 0px;
+            content: "3";
+          }
+
+          mjx-c.mjx-c28::before {
+            padding: 0.75em 0.389em 0.25em 0px;
+            content: "(";
+          }
+
+          mjx-c.mjx-c29::before {
+            padding: 0.75em 0.389em 0.25em 0px;
+            content: ")";
+          }
+
+          mjx-c.mjx-c32::before {
+            padding: 0.666em 0.5em 0px 0px;
+            content: "2";
+          }
+
+          mjx-c.mjx-c1D6FD.TEX-I::before {
+            padding: 0.705em 0.566em 0.194em 0px;
+            content: "β";
+          }
+
+          mjx-c.mjx-c1D6FC.TEX-I::before {
+            padding: 0.442em 0.64em 0.011em 0px;
+            content: "α";
+          }
+        </style>
+        <div class="markdown-preview-sizer markdown-preview-section" style="padding-bottom: ; padding-top: var(--file-margins); padding-right: var(--file-margins); padding-left: var(--file-margins); width: 100%; position: absolute;">
+          <div class="markdown-preview-pusher" style="width: 1px; height: 0.1px; margin-bottom: 0px;"></div>
+          <div class="mod-header">
+            <div class="inline-title" contenteditable="true" spellcheck="true" autocapitalize="on" tabindex="-1" enterkeyhint="done">飞书与slack交互</div>
+          </div>
+          <div>
+            <p><a rel="noopener" class="external-link" href="https://poe.com/s/PPrpfG5SOXjjxHk5ZTzy" target="_blank">https://poe.com/s/PPrpfG5SOXjjxHk5ZTzy</a><br>
+              要实现这个功能，你需要分两部分来处理：一是在飞书上创建一个机器并设置webhook，二是在Slack上创建一个机器并设置webhook。下面是具体的步骤：</p>
+          </div>
+          <div>
+            <h4 data-heading="飞书机器和webhook设置" id="飞书机器和webhook设置" style="display: flex;">
+              <div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle">
+                  <path d="M3 8L12 17L21 8"></path>
+                </svg></div>飞书机器和webhook设置
+            </h4>
+          </div>
+          <div>
+            <ol>
+              <li data-line="0">登录飞书开发者平台：<a data-tooltip-position="top" aria-label="https://open.feishu.cn/" rel="noopener" class="external-link" href="https://open.feishu.cn/" target="_blank">https://open.feishu.cn</a></li>
+              <li data-line="1">创造一个新的应用，并为应该应用添加机器人。</li>
+              <li data-line="2">在应用管理页面，启动事件API，并添加一个事件订阅，设置事件类型为“消息”。</li>
+              <li data-line="3">在你的服务器上，创建一个用于接收飞书事件的API端点。你需要在这个端点中处理飞书发出的消息，并将问题发送到Slack。</li>
+            </ol>
+          </div>
+          <div>
+            <h4 data-heading="Slack 机器和 webhook 设置" id="Slack_机器和_webhook_设置" style="display: flex;">
+              <div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle">
+                  <path d="M3 8L12 17L21 8"></path>
+                </svg></div>Slack 机器和 webhook 设置
+            </h4>
+          </div>
+          <div>
+            <ol>
+              <li data-line="0">登录 Slack API 页面：<a rel="noopener" class="external-link" href="https://api.slack.com/" target="_blank">https://api.slack.com/</a></li>
+              <li data-line="1">创建一个新的 Slack App，并为应该应用添加一个机器用户。</li>
+              <li data-line="2">在应用管理页面，启动事件订阅，设置事件类型为“app_mention”。</li>
+              <li data-line="3">在你的服务器上，创建一个用于接收 Slack 事件的 API 端点。你需要在这个端点中处理 Slack 发出的消息，并将问题发送回飞书。</li>
+            </ol>
+          </div>
+          <div>
+            <h4 data-heading="代码示例" id="代码示例" style="display: flex;">
+              <div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle">
+                  <path d="M3 8L12 17L21 8"></path>
+                </svg></div>代码示例
+            </h4>
+          </div>
+          <div>
+            <p>以下是一个使用 Python 和 Flask 框架的简单示例，用于发现你的需求</p>
+          </div>
+          <div>
+            <pre class="language-from" tabindex="0"><code class="language-from is-loaded">import requests
+
+app = Flask(__name__)
+
+# 飞书机器人的 webhook 地址
+FEISHU_WEBHOOK = 'https://open.feishu.cn/open-apis/bot/v2/hook/&lt;your_feishu_webhook_id&gt;'
+
+# Slack 机器人的 token
+SLACK_BOT_TOKEN = 'xoxb-&lt;your_slack_bot_token&gt;'
+
+# Slack 机器人的 ID
+SLACK_BOT_ID = '&lt;your_slack_bot_id&gt;'
+
+# Slack 频道的 ID
+SLACK_CHANNEL_ID = '&lt;your_slack_channel_id&gt;'
+
+@app.route('/feishu_webhook', methods=['POST'])
+def feishu_webhook():
+    data = request.json
+    if 'event' in data:
+        event = data['event']
+        if 'msg_type' in event and event['msg_type'] == 'text':
+            text = event['text_without_at_bot']
+            send_question_to_slack(text)
+    return jsonify({'Challenge': 'OK'})
+
+@app.route('/slack_webhook', methods=['POST'])
+def slack_webhook():
+    data = request.json
+    if 'event' in data:
+        event = data['event']
+        if 'type' in event and event['type'] == 'app_mention':
+            text = event['text']
+            reply_to_feishu(text)
+    return jsonify({'Challenge': 'OK'})
+
+def send_question_to_slack(text):
+    url = 'https://slack.com/api/chat.postMessage'
+    headers = {'Authorization': 'Bearer ' + SLACK_BOT_TOKEN, 'Content-Type': 'application/json'}
+    payload = {'channel': SLACK_CHANNEL_ID, 'text': f'&lt;@{SLACK_BOT_ID}&gt; {text}'}
+    requests.post(url, headers=headers, json=payload)
+
+def reply_to_feishu(text):
+    headers = {'Content-Type': 'application/json'}
+    payload = {'msg_type': 'text', 'content': {'text': text}}
+    requests.post(FEISHU_WEBHOOK, headers=headers, json=payload)
+
+if __name__ == '__main__':
+    app.run()
+</code><button class="copy-code-button">复制</button></pre>
+          </div>
+          <div>
+            <p>这个演示示例使用了 Flask 框架创建了两个 API 端点：<code>/feishu_webhook</code>和<code>/slack_webhook</code>，分别用于处理飞书和 Slack 的 webhook 请求。当收到飞书的消息时，它会提问发送给 Slack 中的 Claude 机器人。当收到 Slack 中 Claude 机器人的回答时，它会将回答发送回飞书。</p>
+          </div>
+          <div class="mod-footer">
+            <div class="embedded-backlinks" style="display: none;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar-right sidebar">
+      <div class="sidebar-content"><span class="sidebar-section-header">Interactive Graph</span>
+        <div class="graph-view-placeholder">
+          <div class="graph-view-container">
+            <div class="graph-icon graph-expand" role="button" aria-label="Expand" data-tooltip-position="top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-arrow-up-right">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg></div>
+            <canvas id="graph-canvas" width="512px" height="512px"></canvas>
+          </div>
+        </div>
+        <div class="tree-container outline-tree" data-depth="0">
+          <div class="tree-header"><span class="sidebar-section-header">Table Of Contents</span><button class="clickable-icon collapse-tree-button"><iconify-icon icon="ph:arrows-in-line-horizontal-bold" width="18px" height="18px" rotate="90deg" color="currentColor"></iconify-icon></button></div>
+          <div class="tree-scroll-area">
+            <div class="tree-item mod-tree-heading" data-depth="1">
+              <div class="tree-item-contents"><a class="tree-item-link" href="#飞书与slack交互"><span class="tree-item-title">飞书与slack交互</span></a></div>
+              <div class="tree-item-children">
+                <div class="tree-item mod-tree-heading" data-depth="4">
+                  <div class="tree-item-contents"><a class="tree-item-link" href="#飞书机器和webhook设置"><span class="tree-item-title">飞书机器和webhook设置</span></a></div>
+                  <div class="tree-item-children"></div>
+                </div>
+                <div class="tree-item mod-tree-heading" data-depth="4">
+                  <div class="tree-item-contents"><a class="tree-item-link" href="#Slack_机器和_webhook_设置"><span class="tree-item-title">Slack 机器和 webhook 设置</span></a></div>
+                  <div class="tree-item-children"></div>
+                </div>
+                <div class="tree-item mod-tree-heading" data-depth="4">
+                  <div class="tree-item-contents"><a class="tree-item-link" href="#代码示例"><span class="tree-item-title">代码示例</span></a></div>
+                  <div class="tree-item-children"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
